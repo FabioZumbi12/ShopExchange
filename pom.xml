@@ -51,18 +51,16 @@
             <url>http://nexus.theyeticave.net/content/repositories/pub_releases</url>
     </repository>   
   </repositories>
-    
-  <!-- 
+      
   <scm>
-     <connection>scm:git:git@github.com:FabioZumbi12/UltimateChat.git</connection>
-     <developerConnection>scm:git:git@github.com:FabioZumbi12/UltimateChat.git</developerConnection>
-     <url>https://github.com/FabioZumbi12/UltimateChat/tree/master</url>
+     <connection>scm:git:git@github.com:FabioZumbi12/ShopExchange.git</connection>
+     <developerConnection>scm:git:git@github.com:FabioZumbi12/ShopExchange.git</developerConnection>
+     <url>https://github.com/FabioZumbi12/ShopExchange/tree/master</url>
      <tag>${project.version}</tag>
   </scm>
-   -->
-   
+      
   <build>
-    <finalName>${project.name}<!-- -${buildNumber} --></finalName>
+    <finalName>${project.name}-${buildNumber}</finalName>
     <defaultGoal>clean install</defaultGoal>
     <resources>
         <resource>
@@ -112,7 +110,7 @@
                </execution>
             </executions>
       </plugin>
-      <!-- 
+       
     <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>buildnumber-maven-plugin</artifactId>
@@ -132,7 +130,7 @@
           </items>
         </configuration>
       </plugin>
-       -->
+      
     </plugins>
    
    </build>   
