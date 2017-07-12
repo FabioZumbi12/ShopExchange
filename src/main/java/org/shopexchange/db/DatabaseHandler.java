@@ -1,15 +1,14 @@
 package org.shopexchange.db;
 
-import org.bukkit.inventory.ItemStack;
 
 public interface DatabaseHandler {
 
-	void setBuyValue(ItemStack item, double price);
+	void setBuyValue(String item, double price);
 
-	void setSellValue(ItemStack item, double price);
+	void setSellValue(String item, double price);
 	
-	double getBuyValue(ItemStack item);
+	double getBuyValue(String item);
 	
-	double getSellValue(ItemStack item);
+	double getSellValue(String item);
 
 }
