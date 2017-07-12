@@ -1,0 +1,6 @@
+name: ShopExchange
+version: 1
+author: [FabioZumbi12, Joohnnys]
+version: 1
+main: org.shopexchange.ShopExchange
+depends: [ChestShop]
