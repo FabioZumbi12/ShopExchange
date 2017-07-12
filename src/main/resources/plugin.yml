@@ -1,0 +1,6 @@
+main: org.shopexchange.ShopExchange
+name: ShopExchange
+version: ${project.version}
+author: [FabioZumbi12, Joohnnys]
+description: ${project.description}
+softdepend: [ChestShop]
