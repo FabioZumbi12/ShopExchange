@@ -1,13 +1,3 @@
-#Database types: MySQL, Files
-database: Files
-
-#Interval of updates in seconds
-interval: 60
-
-#Time do change prices in seconds
-time: 86400
-
-#Percentage to add or subtract from price: 0.1 = 10%, 0.5 = 50%, 1 = 100%
-modifier: 0.1
-
-#Messages
+# Database type
+database:
+  type: file
