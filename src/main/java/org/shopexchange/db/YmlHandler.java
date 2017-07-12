@@ -16,4 +16,16 @@ public class YmlHandler implements DatabaseHandler {
 		
 	}
 
+	@Override
+	public double getBuyValue(ItemStack item) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public double getSellValue(ItemStack item) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

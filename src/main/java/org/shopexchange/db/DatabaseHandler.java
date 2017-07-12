@@ -4,8 +4,12 @@ import org.bukkit.inventory.ItemStack;
 
 public interface DatabaseHandler {
 
-	void setBuyValue(ItemStack line, double price);
+	void setBuyValue(ItemStack item, double price);
 
-	void setSellValue(ItemStack line, double price);
+	void setSellValue(ItemStack item, double price);
+	
+	double getBuyValue(ItemStack item);
+	
+	double getSellValue(ItemStack item);
 
 }
