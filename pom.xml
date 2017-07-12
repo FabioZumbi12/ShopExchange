@@ -2,8 +2,8 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.shopexchange</groupId>
   <artifactId>ShopExchange</artifactId>
-  <packaging>pom</packaging>
   <name>ShopExchange</name>
+  <description>ShopExchange boosts your server's economy counting buying and selling items. You will have really valuable items, others not so much!</description>
   <version>${pluginVersion}</version>
   
   <dependencies>
