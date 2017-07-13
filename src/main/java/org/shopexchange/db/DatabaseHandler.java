@@ -2,12 +2,12 @@ package org.shopexchange.db;
 
 public abstract interface DatabaseHandler {
 
-	void setBuyValue(String id, double price);
+	void setBuyValue(String key, double price);
 
-	void setSellValue(String id, double price);
+	void setSellValue(String key, double price);
 	
-	double getBuyValue(String id);
+	double getBuyValue(String key);
 	
-	double getSellValue(String id);
+	double getSellValue(String key);
 
 }

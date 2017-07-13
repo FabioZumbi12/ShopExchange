@@ -2,6 +2,7 @@ package org.shopexchange.db.mysql;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import org.bukkit.Bukkit;
@@ -53,4 +54,15 @@ public class MySQL {
     public static Connection getConnection() {
         return con;
     }
+
+	public static void init() {
+		try {
+			PreparedStatement ps = getConnection().prepareStatement(
+					"CREATE TABLE IF NOT EXISTS Items (Key VARCHAR(100),Buy DOUBLE(100),Sell DOUBLE(100),PRIMARY KEY (Key))");
+			ps.executeUpdate();
+			
+			} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 }

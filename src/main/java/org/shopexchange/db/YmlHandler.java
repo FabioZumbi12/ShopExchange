@@ -3,7 +3,6 @@ package org.shopexchange.db;
 import java.io.File;
 import java.io.IOException;
 
-import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.shopexchange.ShopExchange;
@@ -11,26 +10,26 @@ import org.shopexchange.ShopExchange;
 public class YmlHandler implements DatabaseHandler {
 
 	@Override
-	public void setBuyValue(String id, double price) {
-		getConfig().set(id + ".prices.buy", price);
+	public void setBuyValue(String key, double price) {
+		getConfig().set(key + ".prices.buy", price);
 		saveConfig();
 	}
 
 	@Override
-	public void setSellValue(String id, double price) {
-		getConfig().set(id + ".prices.sell", price);
+	public void setSellValue(String key, double price) {
+		getConfig().set(key + ".prices.sell", price);
 		saveConfig();
 
 	}
 
 	@Override
-	public double getBuyValue(String id) {
-		return getConfig().getDouble(id + ".prices.buy");
+	public double getBuyValue(String key) {
+		return getConfig().getDouble(key + ".prices.buy");
 	}
 
 	@Override
-	public double getSellValue(String id) {
-		return getConfig().getDouble(id + ".prices.buy");
+	public double getSellValue(String key) {
+		return getConfig().getDouble(key + ".prices.buy");
 	}
 
 	private File getFile() {

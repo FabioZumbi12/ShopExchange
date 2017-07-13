@@ -8,10 +8,11 @@ import org.bukkit.inventory.ItemStack;
 
 public class ItemStackDB {
 	private YamlConfiguration items;
+	private File itemFile;
 	
 	public ItemStackDB(ShopExchange plugin){
 		items = new YamlConfiguration();
-		File itemFile = new File(plugin.getDataFolder(), "itemIDs.yml");
+		itemFile = new File(plugin.getDataFolder(), "itemIDs.yml");
 		if (!itemFile.exists()){
 			try {
 				itemFile.createNewFile();
@@ -27,7 +28,15 @@ public class ItemStackDB {
 		}
 	}
 	
-	public boolean setItem(ItemStack item){
+	private void save(){
+		try {
+			this.items.save(itemFile);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public String setItem(ItemStack item){
 		String itemId = item.getType().toString();
 		String itemData = SEUtil.getColor(item);				
 		
@@ -39,8 +48,9 @@ public class ItemStackDB {
 		if (!items.getValues(false).values().contains(item) && !itemData.isEmpty()){
 			//se não consta adicionar
 			items.set(itemId+":"+itemData, item);
-			return true;
+			save();
+			return itemId+":"+itemData;
 		}
-		return false;
+		return null;
 	}
 }
