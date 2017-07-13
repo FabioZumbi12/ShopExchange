@@ -12,4 +12,9 @@ public class SEUtil {
 		}
 		return new String();
 	}
+	
+	public static String getID(ItemStack item) {
+				
+		return new String();
+	}
 }
