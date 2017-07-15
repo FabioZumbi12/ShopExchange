@@ -8,25 +8,25 @@ import java.sql.SQLException;
 import org.bukkit.Bukkit;
 import org.bukkit.command.ConsoleCommandSender;
 import org.shopexchange.ShopExchange;
+import org.shopexchange.lang.DatabaseLang;
 
-public class MySQL {
+public class DAOConnection {
+
     public static String host = ShopExchange.get().getConfig().getString("MySQL.host");
     public static String port = ShopExchange.get().getConfig().getString("MySQL.port");
     public static String database = ShopExchange.get().getConfig().getString("MySQL.database");
     public static String username = ShopExchange.get().getConfig().getString("MySQL.user");
     public static String password = ShopExchange.get().getConfig().getString("MySQL.pass");
     public static Connection con;
-    private static String consuccess = "Conexão com MySQL estabelecida";
-    private static String dissuccess = "Conexão com MySQL fechada";
+    private static String createdDb = DatabaseLang.getMySQLCreated();
 
     static ConsoleCommandSender console = Bukkit.getConsoleSender();
 
     // connect
-    public static void connect() {
+    public static void open() {
         if (!isConnected()) {
             try {
                 con = DriverManager.getConnection("jdbc:mysql://" + host + ":" + port + "/" + database, username, password);
-                console.sendMessage("[ShopExchange]" + consuccess);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -34,11 +34,10 @@ public class MySQL {
     }
 
     // disconnect
-    public static void disconnect() {
+    public static void close() {
         if (isConnected()) {
             try {
                 con.close();
-                console.sendMessage("[ShopExchange]" + dissuccess);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -57,10 +56,14 @@ public class MySQL {
 
 	public static void init() {
 		try {
+			open();
 			PreparedStatement ps = getConnection().prepareStatement(
 					"CREATE TABLE IF NOT EXISTS Items (Key VARCHAR(100),Buy DOUBLE(100),Sell DOUBLE(100),PRIMARY KEY (Key))");
 			ps.executeUpdate();
 			
+			ShopExchange.get().getLogger(createdDb);
+			
+			close();			
 			} catch (SQLException e) {
 			e.printStackTrace();
 		}
