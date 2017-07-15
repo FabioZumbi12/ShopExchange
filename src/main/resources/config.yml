@@ -1,3 +1,6 @@
+# Language file
+lang: pt-BR
+
 # Database type
 database:
   type: file
