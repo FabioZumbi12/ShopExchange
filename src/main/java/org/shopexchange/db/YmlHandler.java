@@ -5,12 +5,34 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.shopexchange.ShopExchange;
 
 public class YmlHandler implements DatabaseHandler {
+	
+	@Override
+	public void setLog(String key, double price) {
+		int id = getLogConfig().getConfigurationSection(key).getKeys(false).size();
+		getLogConfig().set(key + "." + id, price);
+		saveLogConfig();
+	}
+	
+	@Override
+	public Map<Integer, Double> getLog(String key) {
+		Map<Integer, Double> log = new HashMap<Integer, Double>();
+		
+		Set<String> ids = getLogConfig().getConfigurationSection(key).getKeys(false);
+		for(String id : ids) {
+			int idNumber = Integer.parseInt(id);
+			double price = getLogConfig().getDouble(key + "." + id);
+			log.put(idNumber, price);
+		}
+		
+		return log;
+	}
 
 	@Override
 	public void setBuyValue(String key, double price) {
@@ -82,6 +104,22 @@ public class YmlHandler implements DatabaseHandler {
 	private void saveConfig() {
 		try {
 			getConfig().save(getFile());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private File getLogFile() {
+		return new File(ShopExchange.get().getDataFolder(), "exchange-log.yml");
+	}
+
+	private FileConfiguration getLogConfig() {
+		return YamlConfiguration.loadConfiguration(getLogFile());
+	}
+
+	private void saveLogConfig() {
+		try {
+			getLogConfig().save(getLogFile());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

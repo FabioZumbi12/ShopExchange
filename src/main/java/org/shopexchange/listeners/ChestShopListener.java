@@ -53,12 +53,7 @@ public class ChestShopListener implements Listener {
 		}
 
 		for (String key : prices.keySet()) {
-			switch (e.getTransactionType()) {
-			case BUY:
-				ShopExchange.get().getDB().setBuyValue(key, prices.get(key));
-			case SELL:
-				ShopExchange.get().getDB().setSellValue(key, prices.get(key));
-			}
+			ShopExchange.get().getDB().setLog(key, prices.get(key));
 		}
 	}
 }

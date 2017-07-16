@@ -60,10 +60,32 @@ public class DAOConnection {
     }
 
 	public static void init() {
+		initItems();
+		initLog();
+	}
+	
+	private static void initItems() {
+			try {
+				open();
+				PreparedStatement ps = getConnection().prepareStatement(
+						"CREATE TABLE IF NOT EXISTS Items (Key VARCHAR(100),Buy DOUBLE(100),Sell DOUBLE(100),PRIMARY KEY (Key))");
+				ps.executeUpdate();
+				
+				ShopExchange.get().getLogger(createdDb);
+				
+				close();			
+				} catch (SQLException e) {
+					ShopExchange.get().getLogger(createdDbError);
+				e.printStackTrace();
+			}
+		
+	}
+	
+	private static void initLog() {
 		try {
-			open();
+			open();			
 			PreparedStatement ps = getConnection().prepareStatement(
-					"CREATE TABLE IF NOT EXISTS Items (Key VARCHAR(100),Buy DOUBLE(100),Sell DOUBLE(100),PRIMARY KEY (Key))");
+					"CREATE TABLE IF NOT EXISTS Log (Key VARCHAR(100),Price DOUBLE(100), PRIMARY KEY (Key))");
 			ps.executeUpdate();
 			
 			ShopExchange.get().getLogger(createdDb);
@@ -73,5 +95,6 @@ public class DAOConnection {
 				ShopExchange.get().getLogger(createdDbError);
 			e.printStackTrace();
 		}
-	}
+	
+}
 }

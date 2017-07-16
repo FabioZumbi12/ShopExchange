@@ -3,6 +3,8 @@ package org.shopexchange.db.mysql;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.shopexchange.ShopExchange;
 import org.shopexchange.lang.DatabaseLang;
@@ -28,6 +30,46 @@ public class DAOStatement {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	public static void insertLog(String key, double price) {
+		try {
+			DAOConnection.open();
+			PreparedStatement ps = DAOConnection.getConnection()
+					.prepareStatement("INSERT IGNORE INTO Log (Key, Price) VALUES (?,?)");
+			ps.setString(1, key);
+			ps.setDouble(2, price);
+			ps.executeUpdate();
+			DAOConnection.close();
+		} catch (SQLException e) {
+			ShopExchange.get().getLogger(insertDbError);
+			e.printStackTrace();
+		}
+	}
+	
+	public static Map<Integer, Double> selectLog(String key) {
+		Map<Integer, Double> log = new HashMap<Integer, Double>();
+			try {
+				DAOConnection.open();
+				PreparedStatement ps = DAOConnection.getConnection()
+						.prepareStatement("SELECT * FROM Log WHERE Key = ?");
+				ps.setString(1, key);
+				ResultSet rs = ps.executeQuery();
+				
+				while(rs.next()) {
+					int id = rs.getInt("PRIMARY KEY");
+					double price = rs.getDouble("Price");
+					
+					log.put(id, price);
+				}
+
+				DAOConnection.close();
+			} catch (SQLException e) {
+				ShopExchange.get().getLogger(selectDbError);
+				e.printStackTrace();
+			}
+
+		return log;
 	}
 
 	public static double selectDouble(String key, TransactionType type) {

@@ -5,6 +5,10 @@ import java.util.Map;
 
 public abstract interface DatabaseHandler {
 
+	void setLog(String key, double price);
+	
+	Map<Integer, Double> getLog(String key);
+
 	void setBuyValue(String key, double price);
 
 	void setSellValue(String key, double price);

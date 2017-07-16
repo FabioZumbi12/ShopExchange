@@ -10,6 +10,16 @@ import org.shopexchange.util.TransactionType;
 public class MySQLHandler implements DatabaseHandler {
 
 	@Override
+	public void setLog(String key, double price) {
+		DAOStatement.insertLog(key, price);
+	}
+	
+	@Override
+	public Map<Integer, Double> getLog(String key) {
+		return DAOStatement.selectLog(key);
+	}
+
+	@Override
 	public void setBuyValue(String key, double price) {
 		DAOStatement.insertDouble(key, TransactionType.BUY, price);
 	}
@@ -35,10 +45,10 @@ public class MySQLHandler implements DatabaseHandler {
 
 	@Override
 	public void setBuyValue(Map<String, Double> keysMap) {
-		for(String key : keysMap.keySet()) {
+		for (String key : keysMap.keySet()) {
 			double price = keysMap.get(key);
 			setBuyValue(key, price);
-		}		
+		}
 	}
 
 	@Override
@@ -46,13 +56,13 @@ public class MySQLHandler implements DatabaseHandler {
 		for (String key : keysMap.keySet()) {
 			double price = keysMap.get(key);
 			setBuyValue(key, price);
-		}		
+		}
 	}
 
 	@Override
 	public Map<String, Double> getBuyValue(List<String> keys) {
 		Map<String, Double> keysMap = new HashMap<String, Double>();
-		for(String key: keys) {
+		for (String key : keys) {
 			double value = getBuyValue(key);
 			keysMap.put(key, value);
 		}
@@ -62,7 +72,7 @@ public class MySQLHandler implements DatabaseHandler {
 	@Override
 	public Map<String, Double> getSellValue(List<String> keys) {
 		Map<String, Double> keysMap = new HashMap<String, Double>();
-		for(String key: keys) {
+		for (String key : keys) {
 			double value = getSellValue(key);
 			keysMap.put(key, value);
 		}
