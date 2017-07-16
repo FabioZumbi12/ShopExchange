@@ -1,1 +1,6 @@
 mysql-created: '&b&lMySQL &bdatabase criada com sucesso!'
+mysql-created-error: '&cErro ao criar &lMySQL &cdatabase!'
+mysql-open-error: '&cErro ao conectar com &lMySQL &cdatabase!'
+mysql-close-error: '&cErro ao desconectar com &lMySQL &cdatabase!'
+mysql-insert-error: '&cErro ao inserir dados a &lMySQL &cdatabase!'
+mysql-select-error: '&cErro ao selecionar dados a &lMySQL &cdatabase!'

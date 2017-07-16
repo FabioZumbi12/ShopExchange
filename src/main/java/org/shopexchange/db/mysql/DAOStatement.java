@@ -4,9 +4,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class DAOStatement {
+import org.shopexchange.ShopExchange;
+import org.shopexchange.lang.DatabaseLang;
+import org.shopexchange.util.TransactionType;
 
-	public static void insertDouble(String key, TYPE type, double price) {
+public class DAOStatement {
+	private static String insertDbError = DatabaseLang.getMySQLInsertError();
+	private static String selectDbError = DatabaseLang.getMySQLSelectError();
+
+	public static void insertDouble(String key, TransactionType type, double price) {
 		String replacedType = replaceType(type);
 		if (replacedType != null) {
 			try {
@@ -18,12 +24,13 @@ public class DAOStatement {
 				ps.executeUpdate();
 				DAOConnection.close();
 			} catch (SQLException e) {
+				ShopExchange.get().getLogger(insertDbError);
 				e.printStackTrace();
 			}
 		}
 	}
 
-	public static double selectDouble(String key, TYPE type) {
+	public static double selectDouble(String key, TransactionType type) {
 		double value = 0;
 		String replacedType = replaceType(type);
 		if (replacedType != null) {
@@ -39,6 +46,7 @@ public class DAOStatement {
 
 				DAOConnection.close();
 			} catch (SQLException e) {
+				ShopExchange.get().getLogger(selectDbError);
 				e.printStackTrace();
 			}
 		}
@@ -66,7 +74,7 @@ public class DAOStatement {
 		return exists;
 	}
 
-	private static String replaceType(TYPE type) {
+	private static String replaceType(TransactionType type) {
 		switch (type) {
 		case BUY:
 			return "Buy";
@@ -75,9 +83,5 @@ public class DAOStatement {
 		default:
 			return null;
 		}
-	}
-
-	public enum TYPE {
-		BUY, SELL;
 	}
 }

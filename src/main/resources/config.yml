@@ -11,3 +11,6 @@ MySQL:
   database: 'shopexchange'
   user: 'root'
   pass: ''
+  
+Hooks:
+  ChestShop: true

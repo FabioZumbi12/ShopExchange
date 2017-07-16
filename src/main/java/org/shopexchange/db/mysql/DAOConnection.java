@@ -19,6 +19,9 @@ public class DAOConnection {
     public static String password = ShopExchange.get().getConfig().getString("MySQL.pass");
     public static Connection con;
     private static String createdDb = DatabaseLang.getMySQLCreated();
+    private static String createdDbError = DatabaseLang.getMySQLCreatedError();
+    private static String openDbError = DatabaseLang.getMySQLOpenError();
+    private static String closeDbError = DatabaseLang.getMySQLCloseError();
 
     static ConsoleCommandSender console = Bukkit.getConsoleSender();
 
@@ -28,6 +31,7 @@ public class DAOConnection {
             try {
                 con = DriverManager.getConnection("jdbc:mysql://" + host + ":" + port + "/" + database, username, password);
             } catch (SQLException e) {
+            	ShopExchange.get().getLogger(openDbError);
                 e.printStackTrace();
             }
         }
@@ -39,6 +43,7 @@ public class DAOConnection {
             try {
                 con.close();
             } catch (SQLException e) {
+            	ShopExchange.get().getLogger(closeDbError);
                 e.printStackTrace();
             }
         }
@@ -65,6 +70,7 @@ public class DAOConnection {
 			
 			close();			
 			} catch (SQLException e) {
+				ShopExchange.get().getLogger(createdDbError);
 			e.printStackTrace();
 		}
 	}
